@@ -6,13 +6,7 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/wx/css/weui.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/wx/css/weuix.css"/>
-
-    <script src="${pageContext.request.contextPath}/static/wx/js/zepto.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/wx/js/zepto.weui.js"></script>
-    <script src="${pageContext.request.contextPath}/static/wx/js/swipe.js"></script>
+    <c:import url="common/common.jsp"></c:import>
 </head>
 <body ontouchstart>
 <div class="page-hd">
@@ -53,7 +47,7 @@
     <c:forEach items="${pageInfo.list}" var="entity">
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__bd">
-                <a href="${entity.url}" class="weui-media-box weui-media-box_appmsg">
+                <a href="${pageContext.request.contextPath}/portal/wx/detail.action?videoId=${entity.videoId}" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__hd">
                         <img class="weui-media-box__thumb" src="${entity.fengmian}" alt="">
                     </div>
@@ -64,10 +58,7 @@
                     </div>
                 </a>
                 <div class="weui-news-info">
-                    <div class="weui-news-infoitem">
-                        <span>1条评论</span>
-                    </div>
-                    <div class="weui-news-infoitem">2018-12-14 10:31</div>
+                    <div class="weui-news-infoitem">${fn:substringBefore(entity.updateTime,".")}</div>
                 </div>
             </div>
 
@@ -130,10 +121,7 @@
             '                    </div>\n' +
             '                </a>\n' +
            '<div class="weui-news-info">\n' +
-            '                    <div class="weui-news-infoitem">\n' +
-            '                        <span>1条评论</span>\n' +
-            '                    </div>\n' +
-            '                    <div class="weui-news-infoitem">2018-12-14 10:31</div>\n' +
+            '                    <div class="weui-news-infoitem">'+o.updateTime.substring(0,19)+'</div>\n' +
             '                </div>'
             '            </div>\n' +
             '\n' +
