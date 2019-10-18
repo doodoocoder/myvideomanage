@@ -329,6 +329,7 @@
 			mi.biaoti,
 			mi.jianjie,
 			mi.fengmian,
+			vi.update_time,
 			vi.video_id,
 			vi.num,
 			vi.url,
