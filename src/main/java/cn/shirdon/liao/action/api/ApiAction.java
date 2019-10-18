@@ -78,7 +78,7 @@ public class ApiAction {
 	
 	/**
 	 * 获取视频地址
-	 * @param mediaId 媒体信息的主键
+	 * @param videoId 媒体信息的主键
 	 * @return
 	 */
 	@RequestMapping("get_video_play.json")
