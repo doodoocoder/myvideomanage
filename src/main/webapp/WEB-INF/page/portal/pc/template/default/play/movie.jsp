@@ -277,7 +277,7 @@
 	// 获取视频地址
 	function getVideoPlay() {
 		$.ajax({
-			url : path + "api/get_video_play.json",
+			url :  "${pageContext.request.contextPath}/api/get_video_play.json",
 			type : "POST",
 			dataType : "json",
 			data : {
