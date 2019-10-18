@@ -123,7 +123,7 @@ public class PortalAction {
      */
     @RequestMapping("wx/getMore.json")
     @ResponseBody
-    public Result getMore( @RequestParam(value="pageNum", defaultValue="1") int pageNum,
+    public Result wxGetMore( @RequestParam(value="pageNum", defaultValue="1") int pageNum,
                            @RequestParam(value="pageSize", defaultValue="10") int pageSize){
         // pageHelper分页插件
         // 只需要在查询之前调用，传入当前页码，以及每一页显示多少条
@@ -137,6 +137,40 @@ public class PortalAction {
         return  result;
 
     }
+/**
+ *@author chj
+ *@date 2019/10/18 10:05
+ *@description 公众号获取视频详情,根据play.action改的
+ *
+ */
+@RequestMapping("wx/detail.action")
+public String wxDetail(ModelMap map,
+                       HttpServletRequest request,
+                       @RequestParam(value = "videoId") String videoId){
+    String templateWx="wx";
+    // 获取该视频的信息
+    VideoInfo videoInfo = videoInfoService.selectByIdWithPortal(videoId);
+    if (videoInfo == null) {
+        // 404
+        return "portal/pc/template/" + templateWx + "/error/404";
+    }
+    if ("0".equals(videoInfo.getStatus())) {
+        // 404
+        return "portal/pc/template/" + templateWx + "/error/404";
+    }
+    map.put("videoInfo", videoInfo);
+
+    // 根据主键，获取媒体信息
+    Map<String, Object> mediaInfo = null;
+    try {
+        mediaInfo = mediaInfoService.selectByMediaId(videoInfo.getMediaId());
+        map.put("mediaInfo", mediaInfo);
+    } catch (QingException e) {
+        // 404
+        return "portal/pc/template/" + templateWx + "/error/404";
+    }
+    return "portal/pc/template/" + templateWx + "/play/movie" ;
+}
 
     /**
      * 跳转首页
